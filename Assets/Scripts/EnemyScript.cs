@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-#region Enemy type 1: enemy with no colors
+#region Enemy behaviour type 1: enemy with no colors
 
-public class EnemyType1 : EnemyBaseClass, IDamageable
+public class EnemyBehaviourType1 : EnemyBaseClass, IDamageable
 {
     /// <summary>
     /// Light attack having 100% chance of hit.
@@ -45,9 +45,9 @@ public class EnemyType1 : EnemyBaseClass, IDamageable
 
 ////--------------------------------------------------------------------------------------------------------------------
 
-#region Enemy type 2: enemy with colors which might have different responses to attacks and different death animations when compared to enemy type 1
+#region Enemy behaviour type 2: enemy with colors which might have different responses to attacks and different death animations when compared to enemy type 1
 
-public class EnemyType2 : EnemyBaseClass, IDamageable, IChangeableColour
+public class EnemyBehaviourType2 : EnemyBaseClass, IDamageable, IChangeableColour
 {
     private Material currentMat;
 
@@ -149,7 +149,6 @@ public class EnemyType2 : EnemyBaseClass, IDamageable, IChangeableColour
 public class EnemyBaseClass : MonoBehaviour
 {
     // public variables
-
     public Collider collider;
     public int index;
     public Vector3 halfSize;
@@ -158,7 +157,7 @@ public class EnemyBaseClass : MonoBehaviour
 
     // private variables
     [SerializeField] private int health;
-    [SerializeField] private protected EnemyType type = EnemyType.CUBE;
+    [SerializeField] private protected EnemyBodyType type = EnemyBodyType.CUBE;
     private Tween lightHitAnimation;
     private Tween heavyHitAnimation;
 
@@ -216,7 +215,7 @@ public class EnemyBaseClass : MonoBehaviour
         }
     }
 
-    public void SetEnemyType(EnemyType _type)
+    public void SetEnemyType(EnemyBodyType _type)
     {
         type = _type;
     }

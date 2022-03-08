@@ -9,7 +9,7 @@ public enum GameState
     STOP,
     PLAY
 }
-public enum EnemyType
+public enum EnemyBodyType
 {
     CUBE = 1,
     SPHERE = 2,
@@ -117,19 +117,24 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void CreateEnemyPool()
     {
+        // Loop through body types of enemies
         for (int i = 0; i < enemyPrefabs.Length; i++)
         {
+            // Loop through pool size of enemy type (i)
             for (int j = 0; j < enemyPoolSize[i]; j++)
             {
+                // 50% chance of the enemy having either behaviour type
                 if (Random.value > 0.5f)
                 {
-                    enemyPool.Add(Instantiate(enemyPrefabs[i], enemyParent).AddComponent<EnemyType1>().GetComponent<EnemyBaseClass>());
+                    enemyPool.Add(Instantiate(enemyPrefabs[i], enemyParent).AddComponent<EnemyBehaviourType1>().GetComponent<EnemyBaseClass>());
                 }
                 else
                 {
-                    enemyPool.Add(Instantiate(enemyPrefabs[i], enemyParent).AddComponent<EnemyType2>().GetComponent<EnemyBaseClass>());
+                    enemyPool.Add(Instantiate(enemyPrefabs[i], enemyParent).AddComponent<EnemyBehaviourType2>().GetComponent<EnemyBaseClass>());
                 }
-                enemyPool[i + j].SetEnemyType((EnemyType)(i + 1));
+
+                // Setting the body type of the created enemy 
+                enemyPool[i + j].SetEnemyType((EnemyBodyType)(i + 1));
             }
         }
     }
